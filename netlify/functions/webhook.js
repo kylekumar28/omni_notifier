@@ -8,6 +8,11 @@ admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
 	databaseURL:
 		"https://omnnotifier-default-rtdb.europe-west1.firebasedatabase.app/",
+	options: {
+		databaseAuthVariableOverride: {
+			uid: "server-worker",
+		},
+	},
 });
 
 const db = admin.database();
@@ -16,8 +21,6 @@ db.ref("messages")
 	.push({ content: "Test message", timestamp: Date.now() })
 	.then(() => console.log("Message saved successfully"))
 	.catch((error) => console.error("Error saving message:", error));
-
-// Test
 
 exports.handler = async (event, context) => {
 	console.log("Received event:", event.body);
