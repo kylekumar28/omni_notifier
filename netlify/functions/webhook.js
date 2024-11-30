@@ -18,6 +18,8 @@ db.ref("messages")
 // Test
 
 exports.handler = async (event, context) => {
+	console.log("Received event:", event.body);
+
 	if (event.httpMethod !== "POST") {
 		return {
 			statusCode: 405,
@@ -26,8 +28,8 @@ exports.handler = async (event, context) => {
 	}
 
 	try {
-		// Parse the TradingView alert JSON payload
 		const { content } = JSON.parse(event.body);
+		console.log("Parsed content:", content);
 
 		if (!content) {
 			return {
@@ -36,7 +38,6 @@ exports.handler = async (event, context) => {
 			};
 		}
 
-		// Save the content to Firebase
 		const messagesRef = db.ref("messages");
 		await messagesRef.push({ content, timestamp: Date.now() });
 
@@ -45,7 +46,7 @@ exports.handler = async (event, context) => {
 			body: "Message received and saved",
 		};
 	} catch (error) {
-		console.error("Error processing webhook:", error);
+		console.error("Error:", error);
 		return {
 			statusCode: 500,
 			body: `Internal Server Error: ${error.message}`,

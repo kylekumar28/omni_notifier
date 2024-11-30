@@ -26,6 +26,11 @@ pauseButton.addEventListener("click", () => {
 	soundPlaying = false;
 });
 
+// Test
+db.ref("messages").on("value", (snapshot) => {
+	console.log("Realtime data:", snapshot.val());
+});
+
 // Listen for new messages
 db.ref("messages").on("child_added", (snapshot) => {
 	const message = snapshot.val();
