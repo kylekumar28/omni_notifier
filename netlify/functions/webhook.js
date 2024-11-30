@@ -21,7 +21,7 @@ console.log(serviceAccount);
 
 admin.initializeApp({
 	credential: admin.credential.applicationDefault(), // Default credentials for testing
-	databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+	databaseURL: "https://omnnotifier.firebaseio.com",
 });
 
 const db = admin.database();
