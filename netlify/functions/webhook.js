@@ -1,4 +1,4 @@
-global.self = global; // Define 'self' for Node.js compatibility
+// global.self = global; // Define 'self' for Node.js compatibility
 
 const admin = require("firebase-admin");
 
