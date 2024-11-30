@@ -15,6 +15,8 @@ db.ref("messages")
 	.then(() => console.log("Message saved successfully"))
 	.catch((error) => console.error("Error saving message:", error));
 
+// Test
+
 exports.handler = async (event, context) => {
 	if (event.httpMethod !== "POST") {
 		return {
