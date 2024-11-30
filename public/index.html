@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>OMNI Notifier</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="notifier">
+			<h1>Discord Channel Notifier</h1>
+			<div id="messages"></div>
+			<button id="pause-sound">Pause Sound</button>
+		</div>
+		<audio id="notification-sound" src="alert.mp3" loop></audio>
+		<script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>

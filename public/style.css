@@ -1,0 +1,38 @@
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	background: #f4f4f9;
+}
+
+.notifier {
+	margin: 50px auto;
+	padding: 20px;
+	max-width: 600px;
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#messages {
+	margin: 20px 0;
+	padding: 10px;
+	border: 1px solid #ddd;
+	height: 300px;
+	overflow-y: scroll;
+	background: #fafafa;
+}
+
+button {
+	padding: 10px 20px;
+	background: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background: #0056b3;
+}
