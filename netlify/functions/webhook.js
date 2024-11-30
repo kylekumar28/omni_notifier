@@ -1,9 +1,11 @@
 const admin = require("firebase-admin");
 
+const serviceAccount = JSON.par - self(process.env.FIREBASE_SERVICE_ACCOUNT);
+
 // Initialize Firebase Admin SDK
 admin.initializeApp({
 	// credential: admin.credential.cert(serviceAccount),
-	credential: admin.credential.applicationDefault(),
+	credential: admin.credential.cert(serviceAccount),
 	databaseURL:
 		"https://omnnotifier-default-rtdb.europe-west1.firebasedatabase.app/",
 });
@@ -43,6 +45,10 @@ exports.handler = async (event, context) => {
 
 		return {
 			statusCode: 200,
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods": "POST",
+			},
 			body: "Message received and saved",
 		};
 	} catch (error) {
