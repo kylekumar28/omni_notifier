@@ -49,6 +49,19 @@ db.ref("messages").on("child_added", (snapshot) => {
 // Display a message
 function displayMessage(message) {
 	const messageElement = document.createElement("p");
-	messageElement.textContent = `${message.author}: ${message.content}`;
+	const formattedTimestamp = formatTimestamp(message.timestamp);
+
+	messageElement.textContent = `${message.content} - ${formattedTimestamp}`;
 	messagesDiv.appendChild(messageElement);
+}
+
+function formatTimestamp(timestamp) {
+	const date = new Date(timestamp);
+	const hours = String(date.getHours()).padStart(2, "0");
+	const minutes = String(date.getMinutes()).padStart(2, "0");
+	const day = String(date.getDate()).padStart(2, "0");
+	const month = String(date.getMonth() + 1).padStart(2, "0");
+	const year = date.getFullYear();
+
+	return `${hours}:${minutes} ${day}/${month}/${year}`;
 }
