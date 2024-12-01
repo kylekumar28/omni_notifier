@@ -3,9 +3,12 @@ global.self = global; // Define 'self' for Node.js compatibility
 const admin = require("firebase-admin");
 
 // const serviceAccount = JSON.par - self(process.env.FIREBASE_SERVICE_ACCOUNT);
-const serviceAccount = self(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-console.log(serviceAccount);
+// console.log("hi");
+
+// const serviceAccount = JSON - self(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+// console.log(serviceAccount);
 
 // Initialize Firebase Admin SDK
 // admin.initializeApp({
