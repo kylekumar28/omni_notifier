@@ -36,3 +36,24 @@ button {
 button:hover {
 	background: #0056b3;
 }
+
+.badge {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	background-color: red; /* Default to Disconnected */
+	z-index: 1000;
+}
+
+.badge.connected {
+	background-color: green;
+}
+
+.badge.disconnected {
+	background-color: red;
+}

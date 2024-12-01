@@ -21,6 +21,7 @@ const db = firebase.database();
 const messagesDiv = document.getElementById("messages");
 const notificationSound = document.getElementById("notification-sound");
 const pauseButton = document.getElementById("pause-sound");
+const connectionStatusBadge = document.getElementById("connection-status");
 
 let soundPlaying = false;
 
@@ -42,6 +43,20 @@ pauseButton.addEventListener("click", () => {
 
 		// Disable pause button
 		pauseButton.disabled = true;
+	}
+});
+
+// Monitor connection status
+db.ref(".info/connected").on("value", (snapshot) => {
+	const isConnected = snapshot.val();
+	if (isConnected) {
+		connectionStatusBadge.textContent = "Connected";
+		connectionStatusBadge.classList.remove("disconnected");
+		connectionStatusBadge.classList.add("connected");
+	} else {
+		connectionStatusBadge.textContent = "Disconnected";
+		connectionStatusBadge.classList.remove("connected");
+		connectionStatusBadge.classList.add("disconnected");
 	}
 });
 
