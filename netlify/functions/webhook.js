@@ -30,7 +30,7 @@ admin.initializeApp({
 	credential: admin.credential.cert(
 		JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
 	),
-	databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+	databaseURL: "https://omninotifier.firebaseio.com",
 });
 
 const db = admin.database();
