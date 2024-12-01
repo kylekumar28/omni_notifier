@@ -33,8 +33,14 @@ admin.initializeApp({
 	credential: admin.credential.cert(
 		JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
 	),
-	databaseURL: "https://omninotifier.firebaseio.com",
+	databaseURL:
+		"https://omnnotifier-default-rtdb.europe-west1.firebasedatabase.app/",
 });
+
+console.log(
+	"Firebase initialized with database URL:",
+	admin.database().ref().toString()
+);
 
 const db = admin.database();
 
