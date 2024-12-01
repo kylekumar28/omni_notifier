@@ -1,28 +1,37 @@
-// global.self = global; // Define 'self' for Node.js compatibility
+global.self = global; // Define 'self' for Node.js compatibility
 
 const admin = require("firebase-admin");
 
-const serviceAccount = JSON.par - self(process.env.FIREBASE_SERVICE_ACCOUNT);
+// const serviceAccount = JSON.par - self(process.env.FIREBASE_SERVICE_ACCOUNT);
+const serviceAccount = self(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 console.log(serviceAccount);
 
 // Initialize Firebase Admin SDK
-admin.initializeApp({
-	// credential: admin.credential.cert(serviceAccount),
-	credential: admin.credential.cert(serviceAccount),
-	databaseURL:
-		"https://omnnotifier-default-rtdb.europe-west1.firebasedatabase.app/",
-	options: {
-		databaseAuthVariableOverride: {
-			uid: "server-worker",
-		},
-	},
-});
+// admin.initializeApp({
+// 	// credential: admin.credential.cert(serviceAccount),
+// 	credential: admin.credential.cert(serviceAccount),
+// 	databaseURL:
+// 		"https://omnnotifier-default-rtdb.europe-west1.firebasedatabase.app/",
+// 	options: {
+// 		databaseAuthVariableOverride: {
+// 			uid: "server-worker",
+// 		},
+// 	},
+// });
 
 // admin.initializeApp({
 // 	credential: admin.credential.applicationDefault(), // Default credentials for testing
 // 	databaseURL: "https://omnnotifier.firebaseio.com",
 // });
+
+// Use the Firebase Admin SDK
+admin.initializeApp({
+	credential: admin.credential.cert(
+		JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+	),
+	databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+});
 
 const db = admin.database();
 

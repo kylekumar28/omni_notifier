@@ -16,6 +16,8 @@ const app = firebase.initializeApp(firebaseConfig);
 
 console.log("Firebase initialized:", app.name);
 
+console.log(process.env.FIREBASE_SERVICE_ACCOUNT);
+
 const db = firebase.database();
 
 const messagesDiv = document.getElementById("messages");
