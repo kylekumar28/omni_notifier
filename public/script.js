@@ -24,12 +24,27 @@ const pauseButton = document.getElementById("pause-sound");
 
 let soundPlaying = false;
 
+function formatTimestamp(timestamp) {
+	const date = new Date(timestamp);
+	const hours = String(date.getHours()).padStart(2, "0");
+	const minutes = String(date.getMinutes()).padStart(2, "0");
+	const day = String(date.getDate()).padStart(2, "0");
+	const month = String(date.getMonth() + 1).padStart(2, "0");
+	const year = date.getFullYear();
+
+	return `${hours}:${minutes} ${day}/${month}/${year}`;
+}
+
 pauseButton.addEventListener("click", () => {
-	notificationSound.pause();
-	soundPlaying = false;
+	if (soundPlaying) {
+		notificationSound.pause();
+		soundPlaying = false;
+
+		// Disable pause button
+		pauseButton.disabled = true;
+	}
 });
 
-// Test
 db.ref("messages").on("value", (snapshot) => {
 	console.log("Realtime data:", snapshot.val());
 });
@@ -43,6 +58,9 @@ db.ref("messages").on("child_added", (snapshot) => {
 	if (!soundPlaying) {
 		notificationSound.play();
 		soundPlaying = true;
+
+		// Enable pause button
+		pauseButton.disabled = false;
 	}
 });
 
@@ -52,16 +70,17 @@ function displayMessage(message) {
 	const formattedTimestamp = formatTimestamp(message.timestamp);
 
 	messageElement.textContent = `${message.content} - ${formattedTimestamp}`;
-	messagesDiv.appendChild(messageElement);
-}
+	// Set it as bold since it's the newest
+	messageElement.style.fontWeight = "bold";
 
-function formatTimestamp(timestamp) {
-	const date = new Date(timestamp);
-	const hours = String(date.getHours()).padStart(2, "0");
-	const minutes = String(date.getMinutes()).padStart(2, "0");
-	const day = String(date.getDate()).padStart(2, "0");
-	const month = String(date.getMonth() + 1).padStart(2, "0");
-	const year = date.getFullYear();
+	// Insert at the top of the messages div
+	messagesDiv.prepend(messageElement);
 
-	return `${hours}:${minutes} ${day}/${month}/${year}`;
+	// Set all other messages to normal weight
+	const allMessages = messagesDiv.querySelectorAll("p");
+	allMessages.forEach((msg, index) => {
+		if (index > 0) {
+			msg.style.fontWeight = "normal";
+		}
+	});
 }
