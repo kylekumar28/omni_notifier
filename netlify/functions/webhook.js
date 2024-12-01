@@ -35,45 +35,39 @@ admin.initializeApp({
 
 const db = admin.database();
 
-db.ref("messages")
-	.push({ content: "Test message", timestamp: Date.now() })
-	.then(() => console.log("Message saved successfully"))
-	.catch((error) => console.error("Error saving message:", error));
+// db.ref("messages")
+// 	.push({ content: "Test message", timestamp: Date.now() })
+// 	.then(() => console.log("Message saved successfully"))
+// 	.catch((error) => console.error("Error saving message:", error));
 
 exports.handler = async (event, context) => {
-	console.log("Received event:", event.body);
-
-	if (event.httpMethod !== "POST") {
-		return {
-			statusCode: 405,
-			body: "Method Not Allowed",
-		};
-	}
+	console.log("Received event:", event);
 
 	try {
-		const { content } = JSON.parse(event.body);
-		console.log("Parsed content:", content);
+		// Parse the incoming payload
+		const body = JSON.parse(event.body);
+		console.log("Parsed body:", body);
 
+		const content = body.content;
 		if (!content) {
 			return {
 				statusCode: 400,
-				body: 'Invalid payload: Missing "content"',
+				body: 'Invalid payload: "content" is missing',
 			};
 		}
 
-		const messagesRef = db.ref("messages");
-		await messagesRef.push({ content, timestamp: Date.now() });
+		// Log what we will save
+		console.log("Content to save:", content);
+
+		// Simulate saving to Firebase (replace this with your actual code)
+		console.log("Simulating saving to Firebase...");
 
 		return {
 			statusCode: 200,
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods": "POST",
-			},
 			body: "Message received and saved",
 		};
 	} catch (error) {
-		console.error("Error:", error);
+		console.error("Error in webhook function:", error);
 		return {
 			statusCode: 500,
 			body: `Internal Server Error: ${error.message}`,
