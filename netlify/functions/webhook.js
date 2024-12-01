@@ -62,6 +62,13 @@ exports.handler = async (event, context) => {
 		// Log what we will save
 		console.log("Content to save:", content);
 
+		// Save the message to Firebase Realtime Database
+		const db = admin.database();
+		await db.ref("messages").push({
+			content: content,
+			timestamp: Date.now(),
+		});
+
 		// Simulate saving to Firebase (replace this with your actual code)
 		console.log("Simulating saving to Firebase...");
 
